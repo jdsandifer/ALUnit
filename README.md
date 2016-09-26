@@ -1,7 +1,8 @@
-# AutoLISP Unit
+# AutoLISP Unit (ALUnit)
 A simple, fast unit testing framework for AutoLISP
 
-This framework will follow the style of JUnit as much as possible, drawing from lisp-unit for AutoLISP implementation ideas from Common Lisp.
+This framework will follow the style of JUnit as much as possible, drawing from lisp-unit
+for AutoLISP implementation ideas from Common Lisp.
 
 Some goals for the project:
 - Be able to run all tests with one command.
