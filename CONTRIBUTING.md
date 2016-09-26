@@ -1,16 +1,16 @@
-#Contributing to autolisp-unit
+#Contributing to ALUnit
 
-Hi there! Interested in contributing to autolisp-unit? We'd love your help. Autolisp-unit is an open source project, built one contribution at a time by users like you.
+Hi there! Interested in contributing to ALUnit? We'd love your help. ALUnit is an open source project, built one contribution at a time by users like you.
 
 Where to get help or report a problem
 
-If you have a question about using autolisp-unit, start a discussion.
-If you think you've found a bug within autolisp-unit, open an issue.
+If you have a question about using ALUnit, start a discussion.
+If you think you've found a bug within ALUnit or have a feature request, open an issue.
 More resources are listed on our Help page.
 
 #Ways to contribute
 
-Whether you're a developer, a designer, or just a autolisp-unit devotee, there are lots of ways to contribute. Here's a few ideas:
+Whether you're a developer, a designer, or just a ALUnit devotee, there are lots of ways to contribute. Here's a few ideas:
 
 Read through the documentation, and click the "improve this page" button, any time you see something confusing, or have a suggestion for something that could be improved.
 Comment on some of the project's open issues. Have you experienced the same problem? Know a work around? Do you have a suggestion for how the feature could be better?
@@ -41,21 +41,21 @@ That's it! You'll be automatically subscribed to receive updates as others revie
 
 - Submitting a pull request via Git command line
 
-Fork the project by clicking "Fork" in the top right corner of jdsandifer/autolisp-unit.
-Clone the repository locally git clone https://github.com/<you-username>/autolisp-unit.
+Fork the project by clicking "Fork" in the top right corner of jdsandifer/AutoLispUnit.
+Clone the repository locally git clone https://github.com/<you-username>/AutoLispUnit.
 Create a new, descriptively named branch to contain your change ( git checkout -b my-awesome-feature ).
 Hack away, add tests. Not necessarily in that order.
 Make sure everything still passes by running the tests (if available).
 Push the branch up ( git push origin my-awesome-feature ).
-Create a pull request by visiting https://github.com/<your-username>/autolisp-unit and following the instructions at the top of the screen.
+Create a pull request by visiting https://github.com/<your-username>/AutoLispUnit and following the instructions at the top of the screen.
 
 #Proposing updates to the documentation
 
-We want the autolisp-unit documentation to be the best it can be. We've open-sourced our docs and we welcome any pull requests if you find it lacking.
+We want the ALUnit documentation to be the best it can be. We've open-sourced our docs and we welcome any pull requests if you find it lacking.
 
 #How to submit changes
 
-You can find the documentation for autolisp-unit in the docs directory. See the section above, submitting a pull request for information on how to propose a change.
+You can find the documentation for ALUnit in the docs directory. See the section above, submitting a pull request for information on how to propose a change.
 
 One gotcha, all pull requests should be directed at the master branch (the default branch).
 
@@ -69,17 +69,17 @@ Any time you propose a code change, you should also include updates to the docum
 
 - Documentation
 
-If your contribution changes any autolisp-unit behavior, make sure to update the documentation. Documentation lives in the docs folder. If the docs are missing information, please feel free to add it in. Great docs make a great project. Include changes to the documentation within your pull request.
+If your contribution changes any ALUnit behavior, make sure to update the documentation. Documentation lives in the docs folder. If the docs are missing information, please feel free to add it in. Great docs make a great project. Include changes to the documentation within your pull request.
 
 - Tests
 
 If you're creating a small fix or patch to an existing feature, a simple test is more than enough. You can usually copy/paste from an existing example in the tests folder.
 If it's a brand new feature, you may need to create entirely new tests.
-Once autolisp-unit is funtional, please use it to test as much as possible.
-Code contributions generally
+Once ALUnit is funtional, please use it to test as much as possible.
 
-Autolisp-unit follows a styleguide found in STYLE.md. Please ensure all of your code, tests, and documentation follow it.
-Running tests locally
+- Code contributions generally
+
+ALUnit follows a styleguide found in STYLE.md. Please ensure all of your code, tests, and documentation follow it.
 
 
 #A thank you
