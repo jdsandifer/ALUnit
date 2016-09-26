@@ -1,13 +1,16 @@
-This is a styleguide for the autolisp-unit project. All code, tests, and 
+This is a styleguide for the AutoLispUnit (ALU) project. All code, tests, and 
 documentation should follow these guidelines.
 
 ##Code
 
 ### File Names
 
-File names should consist of full words, be in all caps with underscores 
-separating words, and with a .lsp extension: `FILE_NAME_EXAMPLE.lsp`. All 
-code should be stored in the `autolisp-unit/src` folder.
+File names should consist of full words, be in Pascal Case, and have a 
+.lsp extension: `FileNameExample.lsp`. All code should be stored in the 
+`AutoLispUnit/src` folder.
+
+For release, all ALU source files will be combined into a large AutoLispUnit.lsp 
+file for easy end-user integration into their existiing AutoLISP file stack.
 
 
 ### General Guidelines
@@ -20,23 +23,23 @@ logical sections, and no extra whitespace.
 
 ### File Headers
 
-File headers should use the multi-line comment with no text (except the added 
-`|`) on the first line or after the closing `|;`.
+File headers should use the multi-line comment with no text on the first line 
+or after the closing `|;`.
 
-The file header should have 3 parts: copyright line, filename and autolisp-unit 
+The file header should have 3 parts: copyright line, filename and ALU 
 identifier line, paragragh(s) describing what's in the file, and paragragh(s) 
 identifying related files - with an empty line between each.
 
-The copyright line and the autolisp-unit identifier should look like the example 
+The copyright line and the ALU identifier should look like the example 
 below in each file:
 ```lisp
-;||
+;|
  | Copyright 2016 original author or authors
  |
- | ASSERT.lsp
- | Part of the autolisp-unit unit testing framework.
+ | Assert.lsp
+ | Part of the AutoLispUnit (ALU) testing framework.
  |
- | Asserts are the basic checking function of autolisp-unit. They define what is
+ | Asserts are the basic checking function of ALU. They define what is
  | being tested about the functions under test. In this framework, all asserts
  | stand on their own - they should never be wrapped in NOT functions or 
  | otherwise negated or altered. Separate assert functions are provided for all
@@ -57,7 +60,7 @@ Every function should have a header with
 
 All parts will follow a Javadoc-like format as illustrated below: 
 ```lisp
-;||
+;|
  | Description of function - ideally one line but as long as necessary. No need 
  | to list the function name as it is just a few lines down.
  | @param:  aString [string] - a string to work on
@@ -74,11 +77,11 @@ All parts will follow a Javadoc-like format as illustrated below:
 
 ### Naming
 
-Autolisp-unit naming will follow a style more akin to those used in the major 
+ALU naming will follow a style more akin to those used in the major 
 programming languages (Java, C, C#, etc.) than in common lisp. The main reasons 
 for this are readability and brevity. The hyphen separated words of lisp can be 
 harder to read than camel case and the hyphens constitute additional, unneeded 
-characters. Here are some examples of the style used in autolisp-unit:
+characters. Here are some examples of the style used in ALU:
 
 - Variables: `aVariableName`, `anotherVariable`, `index2` - Descriptive words/numbers 
 in camelCase.
@@ -89,7 +92,8 @@ PascalCase.
 `ALU:StringConcatenator`, `ALU:TimerStart` - Add `ALU:` to the start of the 
 function's name to prevent conflicts with similar functions already defined in 
 the namespace.
-- AutoLISP Functions: `vl-princ-to-string`, `foreach`, `mapcar` - Use the style found in the official documentation to avoid confusion.
+- AutoLISP Functions: `vl-princ-to-string`, `foreach`, `mapcar` - Use the style found 
+in the official documentation to avoid confusion.
 
 Example (not a real function):
 ```lisp
@@ -131,12 +135,12 @@ addition of only a few other things.
 - Tests should be stored in the autolisp-unit/test folder.
 
 - Test files should only be responsible for testing one code file. The 
-file name should be the name of the file tested plus `_TEST` between the file 
-and the extension: E.g. `ASSERT_TEST.lsp` would contain all tests for `ASSERT.lsp`.
+file name should be the name of the file tested plus `Test` between the file 
+and the extension: E.g. `AssertTest.lsp` would contain all tests for `Assert.lsp`.
 
 - Test functions should descibe the functionality under test and be part of a
-test suite for the function under test. `returnsTrueForGoodAssert` might be a 
-test function in the `assertTrue` suite of tests.
+test suite for the function under test. `ReturnsTrueForGoodAssert` might be a 
+test function in the `AssertTrue` suite of tests.
 
 - Usually, there should be only one assert per test function, but occasionally it 
 makes sense to combine multiple asserts that test the same basic fuctionality.
@@ -149,17 +153,18 @@ least, from a development standpoint. Making its use clear to the end user is
 another thing.
 
 Documentation outside the source files themselves is designed to help users 
-learn the commands, techniques, and processes for using autolisp-unit 
+learn the commands, techniques, and processes for using AutoLispUnit 
 effectively on every AutoLISP project they undertake. To that end, it should 
 include clear descriptions of all commands and techniques with good 
 examples that focus on illuminating one idea at a time.
 
-Aside from using proper grammar, spelling, and prose style and following the 
+Aside from using proper grammar, spelling, and prose style, and following the 
 guidelines above in all code samples - including testing samples - there is 
-little else to say about documentation style. For autolisp-unit, we will use 
+little else to say about documentation style. For ALU, we will use 
 an American English style. Typically that simply means the shorter spelling 
 of a word with multiple spellings - e.g. color, not colour. They only 
 exception to this rule is using "grey" instead of "gray" as both are 
 exceptable in the U.S. but the former seems to be more prevalent worldwide.
 
-Documentation files should be stored in the `autolisp-unit` folder with `.md`.
+Documentation files should be stored in the `AutoLispUnit/docs` folder with a 
+`.md` extension (markdown).
