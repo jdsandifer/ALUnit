@@ -24,16 +24,6 @@
  | *ALU:failMessages* - list of messages to print after testing
  |; 
 
-;|
- | Resets test counter and list of fail messages.
- | @output: Resets variables for the above items.
- |;
- 
-(defun ALU:resetTestInfo ( / )
-	(setq *ALU:testsRun* 0)
-	(setq *ALU:failMessages* '())
-	(princ))
-
 
 ;|		
  | Defines a test - adding it to both the test list and the test suite list.
@@ -48,16 +38,18 @@
 			existingTestWithName
 			(assoc testName *ALU:allTests*))
 		; If so, replace entry
-		(subst
-			(cons testName expressions)
-			existingTestWithName
-			*ALU:allTests*)
+		(setq 
+			*ALU:allTests*
+			(subst
+				(cons testName expressions)
+				existingTestWithName
+				*ALU:allTests*))
 		; Else, add entry
 		(setq 
 			*ALU:allTests*
 			(append 
 				*ALU:allTests* 
-				(cons testName expressions))))
+				(list (cons testName expressions)))))
 
 	;; Add test to test suite list
 	(if
@@ -73,7 +65,7 @@
 					testSuite
 					(append
 						(cdr existingTestSuite)
-						testName))
+						(list testName)))
 				existingTestSuite
 				*ALU:testSuites*))
 		; Else, add the suite and test
@@ -81,7 +73,7 @@
 			*ALU:testSuites*
 			(append 
 				*ALU:testSuites*
-				(cons testSuite testName))))
+				(list (cons testSuite (list testName))))))
 	(princ))
 
 
@@ -104,18 +96,47 @@
 
 
 ;|
+ | Resets test counter and list of fail messages.
+ | @output: Resets variables for the above items.
+ |;
+ 
+(defun ALU:resetTestInfo ( / )
+	(setq *ALU:testsRun* 0)
+	(setq *ALU:failMessages* '())
+	(princ))
+
+
+;|
+ | Prints ALUnit header to the command line.
+ | @output: Header info
+ |;
+ 
+(defun ALU:printOutputHeader ( / )
+	(setq ALU:version "1.0")
+	(princ
+		(strcat
+			"\n"
+			"ALUnit version "
+			ALU:version
+			"\n"))
+	(princ))
+
+
+;|
  | Prints test info to the command line.
  | @output: Standard ALUnit test info output.
  |;
 
 (defun ALU:printTestInfo ( / index )
+	(princ "\n")
+
 	(setq index 0)
 	(while
 		(and *ALU:failMessages* (< index (length *ALU:failMessages*)))
 		(princ
 			(strcat
 				(itoa (1+ index))
-				") "
+				". "
 				(nth index *ALU:failMessages*)
 				"\n"))
 		(setq index (1+ index)))
@@ -135,7 +156,7 @@
 				"\n"
 				"Tests run: "
 				(itoa *ALU:testsRun*)
-				", failures: "
+				", Failures: "
 				(itoa (length *ALU:failMessages*)))))
 		
 	(print))

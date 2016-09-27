@@ -124,16 +124,17 @@
 ;|
  | Checks if the expression evaluates to the same value as the expected value 
  | and records results. (Works like the equal function.)
- | @params: expected return value of expression, expression to test
+ | @params: expectedReturn [a value], functionName [symbol], arguments [list]
  | @output: appropriate code for test result
  |;
 
-(defun assertEqual (expectedReturn expressionToTest / returnValueOrError)
+(defun assertEqual (expectedReturn functionName arguments / returnValueOrError)
 	
 	;; Catch any errors so testing proceeds through all tests
 	(setq returnValueOrError
-		(vl-catch-all-apply 
-			(eval expressionToTest)))
+		(vl-catch-all-apply
+			functionName 
+			arguments))
 	
 	;; Print appropriate code for test result and 
 	;; add a failure or error message to the global list.
@@ -142,8 +143,11 @@
 			(vl-catch-all-error-p returnValueOrError)
 			(ALU:error
 				(strcat
-					(vl-princ-to-string expressionToTest)
-					" caused an error - "
+					"("
+					(vl-princ-to-string functionName)
+					" "
+					(vl-princ-to-string arguments)
+					") caused an error - "
 					(vl-catch-all-error-message returnValueOrError))))
 		(
 			(equal expectedReturn returnValueOrError)
@@ -152,8 +156,11 @@
 			T
 			(ALU:fail
 				(strcat
-					(vl-princ-to-string expressionToTest)
-					" returned "
+					"("
+					(vl-princ-to-string functionName)
+					" "
+					(vl-princ-to-string arguments)
+					") returned "
 					(vl-princ-to-string returnValueOrError)
 					" instead of "
 					(vl-princ-to-string expectedReturn)
@@ -167,8 +174,8 @@
  | @output: appropriate code for test result
  |;
 
-(defun assertTrue (expressionToTest / )
-		(assertEqual T expressionToTest))
+(defun assertTrue (functionName arguments / )
+		(assertEqual T functionName arguments))
 	
 
 ;|
@@ -177,8 +184,8 @@
  | @output: appropriate code for test result
  |;
 
-(defun assertFalse (expressionToTest / )
-		(assertEqual nil expressionToTest))
+(defun assertFalse (functionName arguments / )
+		(assertEqual nil functionName arguments))
 	
 
 ;|
@@ -188,12 +195,14 @@
  | @output: appropriate code for test result
  |;
 
-(defun assertNotEqual (expectedReturn expressionToTest / returnValueOrError)
+(defun assertNotEqual (expectedReturn functionName arguments 
+							  / returnValueOrError)
 	
 	;; Catch any errors so testing proceeds through all tests
 	(setq returnValueOrError
 		(vl-catch-all-apply 
-			(eval expressionToTest)))
+			functionName
+			arguments))
 	
 	;; Print appropriate code for test result and 
 	;; add a failure or error message to the global list.
@@ -202,8 +211,11 @@
 			(vl-catch-all-error-p returnValueOrError)
 			(ALU:error
 				(strcat
-					(vl-princ-to-string expressionToTest)
-					" caused an error - "
+					"("
+					(vl-princ-to-string functionName)
+					" "
+					(vl-princ-to-string arguments)
+					") caused an error - "
 					(vl-catch-all-error-message returnValueOrError))))
 		(
 			(not (equal expectedReturn returnValueOrError))
@@ -212,8 +224,11 @@
 			T
 			(ALU:fail
 				(strcat
-					(vl-princ-to-string expressionToTest)
-					" returned "
+					"("
+					(vl-princ-to-string functionName)
+					" "
+					(vl-princ-to-string arguments)
+					") returned "
 					(vl-princ-to-string returnValueOrError)
 					" instead of "
 					(vl-princ-to-string expectedReturn)
