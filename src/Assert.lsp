@@ -15,6 +15,12 @@
  | See Test.lsp for more information about defining tests.
  |;
 
+ 
+;|
+ | Global variables used:
+ | *ALU:testsRun*
+ | *ALU:failMessages*
+ |; 
 
 ;|
  | Takes care of standard assert passing procedure.
@@ -24,8 +30,7 @@
  
 (defun ALU:pass ( / )
 	(ALU:printPassCode)
-	(setq *ALU:testsRun*
-		(1+ *ALU:testsRun*)))
+	(ALU:incrementTestsRun))
 
 
 ;|		
@@ -38,12 +43,8 @@
 
 (defun ALU:fail ( failureMessage / )
 	(ALU:printFailCode)
-	(append
-		*ALU:failureMessages*
-		(list failureMessage))
-	(setq
-		*ALU:testsRun*
-		(1+ *ALU:testsRun*)))
+	(ALU:addFailMessage failureMessage)
+	(ALU:incrementTestsRun))
 
 
 ;|
@@ -56,12 +57,8 @@
 
 (defun ALU:error ( errorMessage / )
 	(ALU:printErrorCode)
-	(append
-		*ALU:failureMessages*
-		(list errorMessage))
-	(setq
-		*ALU:testsRun*
-		(1+ *ALU:testsRun*)))
+	(ALU:addFailMessage errorMessage)
+	(ALU:incrementTestsRun))
 
 
 ;|
@@ -95,17 +92,32 @@
 (defun ALU:printErrorCode ( / )
 	(princ "E")
 	(princ))
-
-
+	
+	
 ;|
- | Adds an error message to the global failure list.
- | @params: error message [string]
- | @output: Appends errorMessage to globabl failure list.
- | @return: Nothing
+ | Adds one to total tests run.
+ | @output: Adds one to global tests run counter.
  |;
 
-(defun ALU:addFailure ( errorMessage / )
-	(append *ALU:failureList* (list errorMessage))
+(defun ALU:incrementTestsRun ( / )
+	(setq
+		*ALU:testsRun*
+		(1+ *ALU:testsRun*))
+	(princ))
+	
+	
+;|
+ | Adds an error / failure messages to the global list.
+ | @params: failureMessage [string]
+ | @output: Adds message to global list.
+ |;
+
+(defun ALU:addFailMessage ( failMessage / )
+	(setq
+		*ALU:failMessages*
+		(append
+			*ALU:failMessages*
+			(list failMessage)))
 	(princ))
 	
 	
@@ -116,7 +128,7 @@
  | @output: appropriate code for test result
  |;
 
-(defun AssertEqual (expectedReturn expressionToTest / returnValueOrError)
+(defun assertEqual (expectedReturn expressionToTest / returnValueOrError)
 	
 	;; Catch any errors so testing proceeds through all tests
 	(setq returnValueOrError
@@ -128,19 +140,17 @@
 	(cond
 		(
 			(vl-catch-all-error-p returnValueOrError)
-			(ALU:printErrorCode)
-			(ALU:addFailure
+			(ALU:error
 				(strcat
 					(vl-princ-to-string expressionToTest)
 					" caused an error - "
 					(vl-catch-all-error-message returnValueOrError))))
 		(
 			(equal expectedReturn returnValueOrError)
-			(ALU:printPassCode))
+			(ALU:pass))
 		(	
 			T
-			(ALU:printFailCode)
-			(ALU:addFailure
+			(ALU:fail
 				(strcat
 					(vl-princ-to-string expressionToTest)
 					" returned "
@@ -157,8 +167,8 @@
  | @output: appropriate code for test result
  |;
 
-(defun AssertTrue (expressionToTest / )
-		(AssertEqual T expressionToTest))
+(defun assertTrue (expressionToTest / )
+		(assertEqual T expressionToTest))
 	
 
 ;|
@@ -167,8 +177,8 @@
  | @output: appropriate code for test result
  |;
 
-(defun AssertFalse (expressionToTest / )
-		(AssertEqual nil expressionToTest))
+(defun assertFalse (expressionToTest / )
+		(assertEqual nil expressionToTest))
 	
 
 ;|
@@ -178,7 +188,7 @@
  | @output: appropriate code for test result
  |;
 
-(defun AssertNotEqual (expectedReturn expressionToTest / returnValueOrError)
+(defun assertNotEqual (expectedReturn expressionToTest / returnValueOrError)
 	
 	;; Catch any errors so testing proceeds through all tests
 	(setq returnValueOrError
@@ -190,19 +200,17 @@
 	(cond
 		(
 			(vl-catch-all-error-p returnValueOrError)
-			(ALU:printErrorCode)
-			(ALU:addFailure
+			(ALU:error
 				(strcat
 					(vl-princ-to-string expressionToTest)
 					" caused an error - "
 					(vl-catch-all-error-message returnValueOrError))))
 		(
 			(not (equal expectedReturn returnValueOrError))
-			(ALU:printPassCode))
+			(ALU:pass))
 		(	
 			T
-			(ALU:printFailCode)
-			(ALU:addFailure
+			(ALU:fail
 				(strcat
 					(vl-princ-to-string expressionToTest)
 					" returned "
@@ -213,10 +221,10 @@
 	(princ))
 	
 
-; TODO AssertEqualFuzz (equal with a rounding factor)
-; TODO AssertNotEqualFuzz (not equal with a rounding factor)
-; TODO AssertSameObject (use eq)
-; TODO AssertNotSameObject (use not & eq)
+; TODO assertEqualFuzz (equal with a rounding factor)
+; TODO assertNotEqualFuzz (not equal with a rounding factor)
+; TODO assertSameObject (use eq)
+; TODO assertNotSameObject (use not & eq)
 	
 
 (princ "\n:: Assert.lsp loaded ::")
