@@ -1,4 +1,4 @@
-This is a styleguide for the AutoLispUnit (ALU) project. All code, tests, and 
+This is a styleguide for the ALUnit (ALU) project. All code, tests, and 
 documentation should follow these guidelines.
 
 ##Code
