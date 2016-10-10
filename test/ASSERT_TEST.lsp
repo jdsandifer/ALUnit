@@ -1,1 +1,1 @@
-; Blank file to create `test` folder. Will become what it's name implies.
+; Blank file to create `test` folder. Will become what its name implies.
