@@ -79,12 +79,49 @@
 
 
 ;|
+ | Runs a specific test suite.
+ | @params: testSuiteName [string]
+ | @output: Standard ALUnit output.
+ |;
+
+(defun runTestSuite ( testSuiteName / testSuite)
+	(if
+		(setq
+			testSuite
+			(assoc
+				testSuiteName
+				*ALU:testSuites*))
+				
+		(progn
+			(ALU:resetTestInfo)
+			(ALU:printOutputHeader)
+			(ALU:startTimer)
+			(mapcar
+				'(lambda (testName)
+					(foreach
+						testExpression
+						(cdr
+							(assoc testName *ALU:allTests*))
+						(eval testExpression)))
+				(cdr testSuite))
+			(ALU:printElapsedTime)
+			(ALU:printTestInfo))
+		
+		(princ
+			(strcat
+				"\nNo test suite named \""
+				testSuiteName
+				"\".")))
+	(princ))
+
+
+;|
  | Runs a specific test.
  | @params: testName [string]
  | @output: Standard ALUnit output.
  |;
 
-(defun runTest ( testName / )
+(defun runTest ( testName / testExpression)
 	(ALU:resetTestInfo)
 	(ALU:printOutputHeader)
 	(ALU:startTimer)
