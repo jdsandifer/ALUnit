@@ -145,6 +145,7 @@
 			(vl-catch-all-error-p returnValueOrError)
 			(ALU:error
 				(strcat
+					*ALU:currentTestName*
 					"("
 					(vl-princ-to-string functionName)
 					" "
@@ -158,6 +159,7 @@
 			T
 			(ALU:fail
 				(strcat
+					*ALU:currentTestName*
 					"("
 					(vl-princ-to-string functionName)
 					" "
