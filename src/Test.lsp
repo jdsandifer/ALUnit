@@ -22,6 +22,7 @@
  | *ALU:testSuites* - assoc list of test suites and a list of their tests
  | *ALU:testsRun* - counter for total tests run in the current batch
  | *ALU:failMessages* - list of messages to print after testing
+ | *ALU:startTime* - date number for start of testing
  |; 
 
 
@@ -86,12 +87,26 @@
 (defun runTest ( testName / )
 	(ALU:resetTestInfo)
 	(ALU:printOutputHeader)
+	(ALU:startTimer)
 	(foreach
 		testExpression
 		(cdr
 			(assoc testName *ALU:allTests*))
 		(eval testExpression))
+	(ALU:printElapsedTime)
 	(ALU:printTestInfo)
+	(print))
+
+
+;|
+ | Removes all tests so they can be defined again.
+ | @output: Removes test lists.
+ |;
+
+(defun removeAllTests ( / )
+	(setq *ALU:allTests* '())
+	(setq *ALU:testSuites* '())
+	(princ "\nAll ALUnit tests have been removed.")
 	(print))
 
 
@@ -123,13 +138,51 @@
 
 
 ;|
+ | Starts function timer.
+ | @output: Header info
+ |;
+ 
+(defun ALU:startTimer ( / )
+	(setq 
+		*ALU:startTime*
+		(getvar "date"))
+	(princ))
+
+
+;|
+ | Prints elapsed time to command line.
+ | @output: Elapsed time in milliseconds.
+ |;
+ 
+(defun ALU:printElapsedTime ( / MILLISEC_CONVERSION DECIMAL_FORMAT
+										  ZERO_DECIMAL_PLACES)
+	(setq MILLISEC_CONVERSION 86400000
+			DECIMAL_FORMAT 2
+			ZERO_DECIMAL_PLACES 0)
+	(princ
+		(strcat
+			"\nTime: "
+			(rtos
+				(*
+					MILLISEC_CONVERSION
+					(-
+						(getvar "date")
+						*ALU:startTime*))
+				DECIMAL_FORMAT
+				ZERO_DECIMAL_PLACES)
+			" ms"))
+			
+	(princ))
+
+
+;|
  | Prints test info to the command line.
  | @output: Standard ALUnit test info output.
  |;
 
 (defun ALU:printTestInfo ( / index )
 	(princ "\n")
-
+	
 	(setq index 0)
 	(while
 		(and *ALU:failMessages* (< index (length *ALU:failMessages*)))

@@ -100,9 +100,11 @@
  |;
 
 (defun ALU:incrementTestsRun ( / )
-	(setq
-		*ALU:testsRun*
-		(1+ *ALU:testsRun*))
+	(if *ALU:testsRun*
+		(setq
+			*ALU:testsRun*
+			(1+ *ALU:testsRun*))
+		(setq *ALU:testsRun* 1))
 	(princ))
 	
 	
