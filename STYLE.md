@@ -26,8 +26,13 @@ logical sections, and no extra white space.
 File headers should use the multi-line comment with no text on the first line 
 or after the closing `|;`.
 
+<<<<<<< HEAD
+The file header should have 4 parts: copyright line, filename and ALU 
+identifier line, paragragh(s) describing what's in the file, and paragragh(s) 
+=======
 The file header should have 3 parts: copyright line, filename and ALU 
 identifier line, paragraph(s) describing what's in the file, and paragraph(s) 
+>>>>>>> refs/remotes/origin/master
 identifying related files - with an empty line between each.
 
 The copyright line and the ALU identifier should look like the example 
@@ -83,13 +88,13 @@ for this are readability and brevity. The hyphen separated words of lisp can be
 harder to read than camel case and the hyphens constitute additional, unneeded 
 characters. Here are some examples of the style used in ALU:
 
-- Variables: `aVariableName`, `anotherVariable`, `index2` - Descriptive words/numbers 
-in camelCase.
+- Variables: `aVariableName`, `anotherVariable`, `index2` - Descriptive 
+words/numbers in camelCase.
 - Public Functions (listed in docs and used directly by the user): 
-`AFunctionName`, `Function1`, `TheAwesomeFunction` - Descriptive words/numbers in 
-PascalCase. 
+`aFunctionName`, `function1`, `theAwesomeFunction` - Descriptive words/numbers 
+in camelCase. 
 - Private Functions (functions not directly accessed by users): 
-`ALU:StringConcatenator`, `ALU:TimerStart` - Add `ALU:` to the start of the 
+`ALU:stringConcatenator`, `ALU:timerStart` - Add `ALU:` to the start of the 
 function's name to prevent conflicts with similar functions already defined in 
 the namespace.
 - AutoLISP Functions: `vl-princ-to-string`, `foreach`, `mapcar` - Use the style found 
@@ -97,11 +102,11 @@ in the official documentation to avoid confusion.
 
 Example (not a real function):
 ```lisp
-(defun Assert (functionToUse argumentsForFunction / stringToRun)
+(defun assert (functionToUse argumentsForFunction / stringToRun)
    (setq stringToRun
       (vl-princ-to-string
          (strcat functionToUse argumentsForFunction)))
-   (ALU:RunFunctionWithArgs stringToRun))
+   (ALU:runFunctionWithArgs stringToRun))
 ```
 
 ### Formatting
@@ -111,14 +116,14 @@ examples for specific formatting of odd cases
 
 Functions:
 ```lisp
-(defun TestFunction ( / )
+(defun testFunction ( / )
    (princ))
    
-(defun TestFunction (aString / )
+(defun testFunction (aString / )
    (princ aString)
    (princ))
    
-(defun ALU:InternalFunction (argument1 argument2 argument3 argument4 
+(defun ALU:internalFunction (argument1 argument2 argument3 argument4 
                              argument5 argument6 bigArgument1 bigArgument2 
                              / localVariable1 localVariable2 localVariable3 
                                localVariable4 localBiggerVariable1)
