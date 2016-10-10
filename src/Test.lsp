@@ -63,6 +63,8 @@
 		
 		(if
 			; Test not already in suite?
+			; (If it's already there, the name will refer to the new test - 
+			;  no need to re-add it.)
 			(not
 				(member testName existingTestSuite))
 			
