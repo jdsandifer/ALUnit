@@ -23,6 +23,7 @@
  | *ALU:testsRun* - counter for total tests run in the current batch
  | *ALU:failMessages* - list of messages to print after testing
  | *ALU:startTime* - date number for start of testing
+ | *ALU:currentTestName* - name of test currently running
  |; 
 
 
@@ -58,18 +59,26 @@
 		(setq 
 			existingTestSuite
 			(assoc testSuite *ALU:testSuites*))
-		; Add this test to the suite
-		(setq
-			*ALU:testSuites*
-			(subst
-				(cons 
-					testSuite
-					(append
-						(cdr existingTestSuite)
-						(list testName)))
-				existingTestSuite
-				*ALU:testSuites*))
-		; Else, add the suite and test
+			
+		
+		(if
+			; Test not already in suite?
+			(not
+				(member testName existingTestSuite))
+			
+			; Add this test to the suite
+			(setq
+				*ALU:testSuites*
+				(subst
+					(cons 
+						testSuite
+						(append
+							(cdr existingTestSuite)
+							(list testName)))
+					existingTestSuite
+					*ALU:testSuites*)))
+					
+		; If test suite doesn't exist, add the suite and test
 		(setq
 			*ALU:testSuites*
 			(append 
@@ -98,6 +107,7 @@
 			(ALU:startTimer)
 			(mapcar
 				'(lambda (testName)
+					(setq *ALU:currentTestName* testName)
 					(foreach
 						testExpression
 						(cdr
@@ -125,6 +135,7 @@
 	(ALU:resetTestInfo)
 	(ALU:printOutputHeader)
 	(ALU:startTimer)
+	(setq *ALU:currentTestName* testName)
 	(foreach
 		testExpression
 		(cdr
