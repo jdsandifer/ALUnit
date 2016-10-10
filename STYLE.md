@@ -10,15 +10,15 @@ File names should consist of full words, be in Pascal Case, and have a
 `AutoLispUnit/src` folder.
 
 For release, all ALU source files will be combined into a large AutoLispUnit.lsp 
-file for easy end-user integration into their existiing AutoLISP file stack.
+file for easy end-user integration into their existing AutoLISP file stack.
 
 
 ### General Guidelines
 
 80 characters wide, spaces not tabs, indentions at 3 spaces, one space after 
-periods in paragraghs of text, one space after the last word on a line that 
-continues to the next line, three empty lines between functions and other 
-logical sections, and no extra whitespace.
+periods in paragraphs of text, one space after the last word on a line that 
+continues to the next line, two empty lines between functions and other 
+logical sections, and no extra white space.
 
 
 ### File Headers
@@ -26,8 +26,13 @@ logical sections, and no extra whitespace.
 File headers should use the multi-line comment with no text on the first line 
 or after the closing `|;`.
 
+<<<<<<< HEAD
 The file header should have 4 parts: copyright line, filename and ALU 
 identifier line, paragragh(s) describing what's in the file, and paragragh(s) 
+=======
+The file header should have 3 parts: copyright line, filename and ALU 
+identifier line, paragraph(s) describing what's in the file, and paragraph(s) 
+>>>>>>> refs/remotes/origin/master
 identifying related files - with an empty line between each.
 
 The copyright line and the ALU identifier should look like the example 
@@ -106,7 +111,7 @@ Example (not a real function):
 
 ### Formatting
 
-TL;DR - 3 spaces for all indents, closing parentheses on the last line, see 
+TL;DR - 3 spaces for all indents, all closing parentheses on the last line, see 
 examples for specific formatting of odd cases
 
 Functions:
@@ -132,18 +137,18 @@ Functions:
 Tests are code files and should follow all code style guidelines with the 
 addition of only a few other things.
 
-- Tests should be stored in the autolisp-unit/test folder.
+- Tests should be stored in the AutoLispUnit/test folder.
 
 - Test files should only be responsible for testing one code file. The 
 file name should be the name of the file tested plus `Test` between the file 
 and the extension: E.g. `AssertTest.lsp` would contain all tests for `Assert.lsp`.
 
-- Test functions should descibe the functionality under test and be part of a
+- Test functions should describe the functionality under test and be part of a
 test suite for the function under test. `ReturnsTrueForGoodAssert` might be a 
 test function in the `AssertTrue` suite of tests.
 
 - Usually, there should be only one assert per test function, but occasionally it 
-makes sense to combine multiple asserts that test the same basic fuctionality.
+makes sense to combine multiple asserts that test the same basic functionality.
 
 
 ## Documentation
@@ -164,7 +169,7 @@ little else to say about documentation style. For ALU, we will use
 an American English style. Typically that simply means the shorter spelling 
 of a word with multiple spellings - e.g. color, not colour. They only 
 exception to this rule is using "grey" instead of "gray" as both are 
-exceptable in the U.S. but the former seems to be more prevalent worldwide.
+acceptable in the U.S. but the former seems to be more prevalent worldwide.
 
 Documentation files should be stored in the `AutoLispUnit/docs` folder with a 
 `.md` extension (markdown).
