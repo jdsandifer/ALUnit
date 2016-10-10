@@ -85,7 +85,7 @@
 
 ;|
  | Prints code for passing to the command line
- | @output: Prints "F" to command line
+ | @output: Prints "E" to command line
  | @return: Nothing
  |;
 
