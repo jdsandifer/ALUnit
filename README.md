@@ -20,3 +20,5 @@ same files as the functions they're testing - so review the documentation to see
 that's done. Don't worry, if you do that part well you'll only have to create the tests once 
 and then they will always be there for you to double check that everything's working the way 
 it should.
+
+To see more of my work in AutoLISP, check out my repository of [AutoLISP apps](https://github.com/jdsandifer/AutoLISP).
