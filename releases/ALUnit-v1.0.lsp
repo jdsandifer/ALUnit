@@ -27,7 +27,7 @@ SOFTWARE.
 
 ;|
  | Copyright (c) 2016, J.D. Sandifer
- | See LICENSE file for use restrictions.
+ | See LICENSE above for use restrictions.
  |
  | Assert.lsp
  | Part of the ALUnit testing framework.
