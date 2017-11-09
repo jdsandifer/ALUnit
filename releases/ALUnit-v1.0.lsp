@@ -39,7 +39,7 @@ SOFTWARE.
  | opposites.
  |
  | Testing works most effectively if asserts are part of a defined test.
- | See Test.lsp for more information about defining tests.
+ | See Test.lsp (included below) for more information about defining tests.
  |;
 
  
@@ -282,7 +282,7 @@ SOFTWARE.
 
 ;|
  | Copyright (c) 2016, J.D. Sandifer
- | See LICENSE file for use restrictions.
+ | See LICENSE at top of file for use restrictions.
  |
  | Test.lsp
  | Part of the ALUnit testing framework.
@@ -294,7 +294,7 @@ SOFTWARE.
  | related tests easily. For this reason, it is a required parameter when 
  | defining a new test.
  |
- | See Assert.lsp for more information about which asserts are available.
+ | See Assert.lsp (included above) for more information about which asserts are available.
  |;
 
  
