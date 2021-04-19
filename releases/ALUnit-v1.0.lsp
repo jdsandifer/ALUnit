@@ -392,11 +392,9 @@ SOFTWARE.
 			(mapcar
 				'(lambda (testName)
 					(setq *ALU:currentTestName* testName)
-					(foreach
-						testExpression
+					(eval
 						(cdr
-							(assoc testName *ALU:allTests*))
-						(eval testExpression)))
+							(assoc testName *ALU:allTests*))))
 				(cdr testSuite))
 			(ALU:printElapsedTime)
 			(ALU:printTestInfo))
@@ -415,16 +413,14 @@ SOFTWARE.
  | @output: Standard ALUnit output.
  |;
 
-(defun runTest ( testName / testExpression)
+(defun runTest ( testName )
 	(ALU:resetTestInfo)
 	(ALU:printOutputHeader)
 	(ALU:startTimer)
 	(setq *ALU:currentTestName* testName)
-	(foreach
-		testExpression
+	(eval
 		(cdr
-			(assoc testName *ALU:allTests*))
-		(eval testExpression))
+			(assoc testName *ALU:allTests*)))
 	(ALU:printElapsedTime)
 	(ALU:printTestInfo)
 	(print))
