@@ -1,17 +1,16 @@
-This is a styleguide for the ALUnit (ALU) project. All code, tests, and 
+This is a style guide for the ALUnit (ALU) project. All code, tests, and 
 documentation should follow these guidelines.
 
-##Code
+## Code
 
 ### File Names
 
 File names should consist of full words, be in Pascal Case, and have a 
 .lsp extension: `FileNameExample.lsp`. All code should be stored in the 
-`AutoLispUnit/src` folder.
+`ALUnit/src` folder.
 
-For release, all ALU source files will be combined into a large AutoLispUnit.lsp 
+For release, all ALU source files will be combined into a large ALUnit.lsp 
 file for easy end-user integration into their existing AutoLISP file stack.
-
 
 ### General Guidelines
 
@@ -20,19 +19,12 @@ periods in paragraphs of text, one space after the last word on a line that
 continues to the next line, two empty lines between functions and other 
 logical sections, and no extra white space.
 
-
 ### File Headers
 
 File headers should use the multi-line comment with no text on the first line 
 or after the closing `|;`.
 
-<<<<<<< HEAD
-The file header should have 4 parts: copyright line, filename and ALU 
-identifier line, paragragh(s) describing what's in the file, and paragragh(s) 
-=======
 The file header should have 3 parts: copyright line, filename and ALU 
-identifier line, paragraph(s) describing what's in the file, and paragraph(s) 
->>>>>>> refs/remotes/origin/master
 identifying related files - with an empty line between each.
 
 The copyright line and the ALU identifier should look like the example 
@@ -42,7 +34,7 @@ below in each file:
  | Copyright 2016 original author or authors
  |
  | Assert.lsp
- | Part of the AutoLispUnit (ALU) testing framework.
+ | Part of the ALUnit (ALU) testing framework.
  |
  | Asserts are the basic checking function of ALU. They define what is
  | being tested about the functions under test. In this framework, all asserts
@@ -53,7 +45,7 @@ below in each file:
  | Testing works most effectively if asserts are part of a defined test.
  | See TEST.lsp for more information about defining tests.
  |;
-``` 
+```
 
 ### Function headers
  
@@ -137,7 +129,7 @@ Functions:
 Tests are code files and should follow all code style guidelines with the 
 addition of only a few other things.
 
-- Tests should be stored in the AutoLispUnit/test folder.
+- Tests should be stored in the ALUnit/test folder.
 
 - Test files should only be responsible for testing one code file. The 
 file name should be the name of the file tested plus `Test` between the file 
@@ -150,7 +142,6 @@ test function in the `AssertTrue` suite of tests.
 - Usually, there should be only one assert per test function, but occasionally it 
 makes sense to combine multiple asserts that test the same basic functionality.
 
-
 ## Documentation
 
 Following these guidelines should make the code largely self-documenting - at 
@@ -158,18 +149,18 @@ least, from a development standpoint. Making its use clear to the end user is
 another thing.
 
 Documentation outside the source files themselves is designed to help users 
-learn the commands, techniques, and processes for using AutoLispUnit 
+learn the commands, techniques, and processes for using ALUnit 
 effectively on every AutoLISP project they undertake. To that end, it should 
 include clear descriptions of all commands and techniques with good 
 examples that focus on illuminating one idea at a time.
 
 Aside from using proper grammar, spelling, and prose style, and following the 
 guidelines above in all code samples - including testing samples - there is 
-little else to say about documentation style. For ALU, we will use 
+little else to say about documentation style. For ALUnit, we will use 
 an American English style. Typically that simply means the shorter spelling 
-of a word with multiple spellings - e.g. color, not colour. They only 
+of a word with multiple spellings - e.g. color, not colour. The only 
 exception to this rule is using "grey" instead of "gray" as both are 
-acceptable in the U.S. but the former seems to be more prevalent worldwide.
+acceptable in the U.S., but the former seems to be more prevalent worldwide.
 
-Documentation files should be stored in the `AutoLispUnit/docs` folder with a 
+Documentation files should be stored in the `ALUnit/docs` folder with a 
 `.md` extension (markdown).
