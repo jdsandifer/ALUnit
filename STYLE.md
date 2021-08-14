@@ -24,7 +24,8 @@ logical sections, and no extra white space.
 File headers should use the multi-line comment with no text on the first line 
 or after the closing `|;`.
 
-The file header should have 3 parts: copyright line, filename and ALU 
+The file header should have 4 parts: copyright line, filename and ALU 
+identifier line, paragragh(s) describing what's in the file, and paragragh(s) 
 identifying related files - with an empty line between each.
 
 The copyright line and the ALU identifier should look like the example 
