@@ -304,7 +304,7 @@ SOFTWARE.
  | *ALU:testSuites* - assoc list of test suites and a list of their tests
  | *ALU:testsRun* - counter for total tests run in the current batch
  | *ALU:failMessages* - list of messages to print after testing
- | *ALU:startTime* - date number for start of testing
+ | *ALU:startTime* - milliseconds since boot time for start of testing
  | *ALU:currentTestName* - name of test currently running
  |; 
 
@@ -392,11 +392,9 @@ SOFTWARE.
 			(mapcar
 				'(lambda (testName)
 					(setq *ALU:currentTestName* testName)
-					(foreach
-						testExpression
+					(eval
 						(cdr
-							(assoc testName *ALU:allTests*))
-						(eval testExpression)))
+							(assoc testName *ALU:allTests*))))
 				(cdr testSuite))
 			(ALU:printElapsedTime)
 			(ALU:printTestInfo))
@@ -415,16 +413,14 @@ SOFTWARE.
  | @output: Standard ALUnit output.
  |;
 
-(defun runTest ( testName / testExpression)
+(defun runTest ( testName )
 	(ALU:resetTestInfo)
 	(ALU:printOutputHeader)
 	(ALU:startTimer)
 	(setq *ALU:currentTestName* testName)
-	(foreach
-		testExpression
+	(eval
 		(cdr
-			(assoc testName *ALU:allTests*))
-		(eval testExpression))
+			(assoc testName *ALU:allTests*)))
 	(ALU:printElapsedTime)
 	(ALU:printTestInfo)
 	(print))
@@ -477,7 +473,7 @@ SOFTWARE.
 (defun ALU:startTimer ( / )
 	(setq 
 		*ALU:startTime*
-		(getvar "date"))
+		(getvar "millisecs"))
 	(princ))
 
 
@@ -486,20 +482,16 @@ SOFTWARE.
  | @output: Elapsed time in milliseconds.
  |;
  
-(defun ALU:printElapsedTime ( / MILLISEC_CONVERSION DECIMAL_FORMAT
-										  ZERO_DECIMAL_PLACES)
-	(setq MILLISEC_CONVERSION 86400000
-			DECIMAL_FORMAT 2
+(defun ALU:printElapsedTime ( / DECIMAL_FORMAT ZERO_DECIMAL_PLACES)
+	(setq DECIMAL_FORMAT 2
 			ZERO_DECIMAL_PLACES 0)
 	(princ
 		(strcat
 			"\nTime: "
 			(rtos
-				(*
-					MILLISEC_CONVERSION
-					(-
-						(getvar "date")
-						*ALU:startTime*))
+				(-
+					(getvar "millisecs")
+					*ALU:startTime*)
 				DECIMAL_FORMAT
 				ZERO_DECIMAL_PLACES)
 			" ms"))
